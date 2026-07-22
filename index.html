@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BetterPatch | AI-Powered Product Improvement Audits</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary": "#000000",
+                    "on-secondary": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "secondary-fixed": "#dbe1ff",
+                    "primary-fixed": "#dae2fd",
+                    "surface-container-low": "#f2f4f6",
+                    "primary": "#000000",
+                    "tertiary-fixed": "#6ffbbe",
+                    "surface-dim": "#d8dadc",
+                    "surface-tint": "#565e74",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f7f9fb",
+                    "on-surface": "#191c1e",
+                    "secondary-container": "#316bf3",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#00174b",
+                    "surface-container": "#eceef0",
+                    "on-primary-container": "#7c839b",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "outline-variant": "#c6c6cd",
+                    "on-primary-fixed-variant": "#3f465c",
+                    "primary-fixed-dim": "#bec6e0",
+                    "tertiary-container": "#002113",
+                    "on-surface-variant": "#45464d",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "secondary-fixed-dim": "#b4c5ff",
+                    "on-primary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#009668",
+                    "secondary": "#0051d5",
+                    "on-secondary-container": "#fefcff",
+                    "outline": "#76777d",
+                    "inverse-primary": "#bec6e0",
+                    "inverse-surface": "#2d3133",
+                    "surface-bright": "#f7f9fb",
+                    "on-background": "#191c1e",
+                    "on-tertiary-fixed": "#002113",
+                    "surface-container-high": "#e6e8ea",
+                    "on-error": "#ffffff",
+                    "on-primary-fixed": "#131b2e",
+                    "inverse-on-surface": "#eff1f3",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#003ea8",
+                    "surface-variant": "#e0e3e5",
+                    "primary-container": "#131b2e",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "gutter": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "lg": "48px",
+                    "margin-desktop": "48px",
+                    "xl": "80px",
+                    "margin-mobile": "16px",
+                    "xs": "4px",
+                    "md": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at 50% 50%, rgba(219, 225, 255, 0.3) 0%, rgba(247, 249, 251, 1) 70%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant transition-all duration-300">
+<div class="max-w-7xl mx-auto flex justify-between items-center h-16 px-margin-mobile md:px-margin-desktop">
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md font-bold text-primary" href="#">BetterPatch</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#how-it-works">How It Works</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#features">Features</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="#pricing">Pricing</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hidden md:inline-flex px-md py-xs rounded-lg border border-outline text-primary font-label-md hover:bg-surface-container-low transition-colors active:scale-95" onclick="toggleModal('early-access-modal')">
+                    Run Free Audit
+                </button>
+<button class="md:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</nav>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-20 pb-32 hero-gradient">
+<div class="absolute inset-0 z-0">
+
+</div>
+<div class="relative z-10 max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
+<span class="inline-flex items-center px-sm py-1 rounded-full bg-secondary-container text-on-secondary-container font-label-sm mb-base">
+<span class="material-symbols-outlined text-[14px] mr-1">auto_awesome</span>
+                The Future of SaaS Product Management
+            </span>
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md max-w-4xl mx-auto leading-tight">
+                Don't Guess. Build the Best Version of Your Product.
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-xl max-w-2xl mx-auto">
+                Get AI-powered, actionable insights on how to improve your SaaS features, design, and user experience in seconds.
+            </p>
+<form class="max-w-3xl mx-auto bg-surface-container-lowest p-sm md:p-base rounded-xl shadow-xl flex flex-col md:flex-row gap-sm items-stretch border border-outline-variant">
+<div class="flex-1 relative">
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary outline-none text-body-md" placeholder="Your Product URL" required="" type="url"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">language</span>
+</div>
+<div class="flex-1 relative">
+<input class="w-full pl-10 pr-4 py-3 rounded-lg border border-outline-variant focus:ring-2 focus:ring-secondary focus:border-secondary outline-none text-body-md" placeholder="Work Email" required="" type="email"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">mail</span>
+</div>
+<button class="bg-[#10B981] text-white px-md py-3 rounded-lg font-label-md hover:bg-[#0da271] transition-all whitespace-nowrap active:scale-[0.98]" type="submit">
+                    Get Your Free Improvement Audit
+                </button>
+</form>
+<p class="mt-md font-label-sm text-label-sm text-on-surface-variant flex items-center justify-center gap-4">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-on-tertiary-container">verified</span> No credit card required</span>
+<span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px] text-on-tertiary-container">bolt</span> Instant 60-second friction scan</span>
+</p>
+</div>
+</section>
+<!-- Pain Points -->
+<section class="py-xl bg-surface">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant group hover:border-secondary transition-colors">
+<div class="w-12 h-12 bg-error-container text-error rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-sm">Struggling to Spot UX Bottlenecks?</h3>
+<p class="font-body-md text-on-surface-variant">Stop wasting hours in session recordings. BetterPatch highlights exactly where users drop off and why.</p>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant group hover:border-secondary transition-colors">
+<div class="w-12 h-12 bg-secondary-fixed text-on-secondary-fixed rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">compare_arrows</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-sm">Asking "How Do I Beat X?"</h3>
+<p class="font-body-md text-on-surface-variant">Competitor analysis that doesn't just list features—it reveals the strategic gaps in their UX for you to exploit.</p>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant group hover:border-secondary transition-colors">
+<div class="w-12 h-12 bg-tertiary-fixed text-on-tertiary-fixed rounded-lg flex items-center justify-center mb-md">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="font-headline-md text-headline-md mb-sm">Tired of Vague User Requests?</h3>
+<p class="font-body-md text-on-surface-variant">Translate "This UI is confusing" into structured enhancement blueprints with prioritized developer tasks.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Prop: Enhancement Blueprint -->
+<section class="py-xl bg-surface-container-lowest" id="how-it-works">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Turn Raw Product Input Into Better Blueprints</h2>
+<p class="font-body-lg text-on-surface-variant max-w-2xl mx-auto">Our AI engine processes your current product state and generates ready-to-implement technical specs.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-md items-center">
+<div class="p-lg bg-surface border border-outline-variant rounded-xl shadow-inner">
+<div class="flex items-center gap-2 mb-md text-on-surface-variant">
+<span class="material-symbols-outlined">input</span>
+<span class="font-label-md">INPUT: CURRENT STATE</span>
+</div>
+<div class="bg-surface-container-lowest p-md rounded-lg border border-outline-variant mb-md">
+<p class="font-label-md text-secondary mb-xs">Feature: User Onboarding Flow</p>
+<p class="text-body-sm text-on-surface-variant">Multi-step form, 12 required fields, email verification first.</p>
+</div>
+<div class="flex justify-center py-base">
+<span class="material-symbols-outlined text-4xl text-outline-variant animate-bounce">keyboard_double_arrow_down</span>
+</div>
+</div>
+<div class="p-lg bg-primary-container text-on-primary rounded-xl shadow-2xl transform lg:translate-x-8 lg:-rotate-1">
+<div class="flex items-center gap-2 mb-md text-secondary-fixed">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="font-label-md uppercase tracking-wider">BetterPatch Enhancement Blueprint</span>
+</div>
+<div class="space-y-md">
+<div class="border-l-2 border-on-tertiary-container pl-md">
+<h4 class="font-label-md text-on-tertiary-container mb-xs">IDENTIFIED FRICTION</h4>
+<p class="text-body-sm text-surface-variant">High drop-off (42%) at step 2. Email verification creates cognitive friction before user sees value.</p>
+</div>
+<div class="border-l-2 border-secondary-fixed pl-md">
+<h4 class="font-label-md text-secondary-fixed mb-xs">ACTIONABLE FIX</h4>
+<p class="text-body-sm text-surface-variant">Implement "Progressive Profiling". Defer verification until post-dashboard entry. Collapse 12 fields to 4.</p>
+</div>
+<div class="border-l-2 border-tertiary-fixed pl-md">
+<h4 class="font-label-md text-tertiary-fixed mb-xs">EXPECTED IMPACT</h4>
+<p class="text-body-sm text-surface-variant">+28% Completion Rate • -1.2m Time to Activation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Feature Grid -->
+<section class="py-xl bg-surface" id="features">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<h2 class="font-headline-lg text-headline-lg text-center mb-xl">Enterprise-Grade Insights, Startup Speed</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary flex items-center justify-center">
+<span class="material-symbols-outlined">troubleshoot</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Automated UX Friction Audit</h3>
+</div>
+<p class="font-body-md text-on-surface-variant">Continuously scan your interface for design anti-patterns and performance bottlenecks that kill conversions.</p>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-10 h-10 rounded-full bg-tertiary-container text-on-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Feature Gap Identification</h3>
+</div>
+<p class="font-body-md text-on-surface-variant">Know exactly what features your users are looking for that your competitors already have—and what's missing in the market.</p>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined">map</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Actionable Optimization Roadmaps</h3>
+</div>
+<p class="font-body-md text-on-surface-variant">Get a prioritized list of development tasks ranked by ROI and ease of implementation. Focus on what moves the needle.</p>
+</div>
+<div class="p-md bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center gap-4 mb-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined">monitoring</span>
+</div>
+<h3 class="font-headline-md text-headline-md">Competitive Benchmark Analysis</h3>
+</div>
+<p class="font-body-md text-on-surface-variant">Compare your product's performance metrics and user sentiment directly against direct competitors in real-time.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="py-xl bg-surface-container-low" id="pricing">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+<div class="text-center mb-xl">
+<h2 class="font-headline-lg text-headline-lg mb-sm">Simple Pricing for Growing Teams</h2>
+<p class="font-body-lg text-on-surface-variant">Choose the plan that matches your product's scale.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md max-w-4xl mx-auto">
+<!-- Starter Plan -->
+<div class="p-lg bg-surface-container-lowest border border-outline-variant rounded-xl flex flex-col">
+<div class="mb-md">
+<h3 class="font-headline-md text-headline-md">Starter</h3>
+<p class="text-body-sm text-on-surface-variant">Ideal for 1-10 Employee SaaS</p>
+</div>
+<div class="mb-lg">
+<span class="text-4xl font-bold text-primary">$29</span>
+<span class="text-on-surface-variant font-label-md">/mo</span>
+</div>
+<ul class="space-y-sm mb-lg flex-1">
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+                            3 Active Feature Scans
+                        </li>
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+                            Basic UX Bottleneck Reports
+                        </li>
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-on-tertiary-container">check_circle</span>
+                            Single User Access
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-lg border border-primary text-primary font-label-md hover:bg-surface-container transition-colors">
+                        Start 7-Day Free Trial
+                    </button>
+</div>
+<!-- Pro Plan -->
+<div class="p-lg bg-primary-container text-on-primary rounded-xl flex flex-col relative border-2 border-secondary shadow-xl overflow-hidden">
+<div class="absolute top-0 right-0 bg-secondary px-md py-1 rounded-bl-lg font-label-sm text-white">Most Popular</div>
+<div class="mb-md">
+<h3 class="font-headline-md text-headline-md">Pro</h3>
+<p class="text-body-sm text-surface-variant">Most Popular for Scaling Products</p>
+</div>
+<div class="mb-lg">
+<span class="text-4xl font-bold text-white">$79</span>
+<span class="text-surface-variant font-label-md">/mo</span>
+</div>
+<ul class="space-y-sm mb-lg flex-1">
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed">check_circle</span>
+                            Unlimited Feature Scans
+                        </li>
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed">check_circle</span>
+                            Full Enhancement Blueprints
+                        </li>
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed">check_circle</span>
+                            Competitor Benchmarking
+                        </li>
+<li class="flex items-center gap-2 font-body-sm">
+<span class="material-symbols-outlined text-tertiary-fixed">check_circle</span>
+                            Priority Support
+                        </li>
+</ul>
+<button class="w-full py-3 rounded-lg bg-secondary text-white font-label-md hover:bg-opacity-90 transition-all active:scale-95 shadow-lg shadow-secondary/20">
+                        Get Pro Insights
+                    </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA Banner -->
+<section class="bg-primary-container py-xl relative overflow-hidden">
+
+<div class="max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop text-center relative z-10">
+<h2 class="font-headline-lg text-headline-lg text-white mb-md">Ready to Build the Best Version of Your Product?</h2>
+<form class="max-w-lg mx-auto flex flex-col md:flex-row gap-base">
+<input class="flex-1 px-md py-3 rounded-lg border-none focus:ring-2 focus:ring-secondary outline-none text-body-md" placeholder="Enter your work email" required="" type="email"/>
+<button class="bg-[#10B981] text-white px-lg py-3 rounded-lg font-label-md hover:bg-[#0da271] transition-all whitespace-nowrap active:scale-95" type="submit">
+                    Start Scanning
+                </button>
+</form>
+<p class="mt-sm text-surface-variant text-body-sm">Join 1,200+ SaaS teams shipping faster with BetterPatch.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-surface-container-highest border-t border-outline-variant py-lg">
+<div class="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-md">
+<div class="flex flex-col items-center md:items-start">
+<span class="font-headline-md text-headline-md font-bold text-on-surface mb-xs">BetterPatch</span>
+<p class="font-body-sm text-on-surface-variant">© 2024 BetterPatch. All rights reserved.</p>
+<p class="font-label-sm text-secondary mt-1">betterpatch.info</p>
+</div>
+<div class="flex gap-lg">
+<div class="flex flex-col gap-xs">
+<h5 class="font-label-md text-on-surface">Legal</h5>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">Privacy Policy</a>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">Terms of Service</a>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">Cookie Policy</a>
+</div>
+<div class="flex flex-col gap-xs">
+<h5 class="font-label-md text-on-surface">Connect</h5>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">Contact</a>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">Twitter</a>
+<a class="font-body-sm text-on-surface-variant hover:underline" href="#">LinkedIn</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Early Access Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-[100] hidden items-center justify-center p-md bg-primary/40 backdrop-blur-sm" id="early-access-modal">
+<div class="bg-surface-container-lowest w-full max-w-md rounded-xl shadow-2xl overflow-hidden border border-outline-variant scale-95 transition-transform duration-300" id="modal-content">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-headline-md text-headline-md">BetterPatch Early Access</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors" onclick="toggleModal('early-access-modal')">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-md">
+<div class="mb-md p-sm bg-secondary-container text-on-secondary-container rounded-lg font-body-sm">
+                    BetterPatch is currently in Early Access. Join the priority list to get your audit in the next batch.
+                </div>
+<form class="space-y-md">
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-xs">Full Name</label>
+<input class="w-full px-md py-base rounded-lg border border-outline-variant focus:ring-2 focus:ring-secondary outline-none" required="" type="text"/>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-xs">Work Email</label>
+<input class="w-full px-md py-base rounded-lg border border-outline-variant focus:ring-2 focus:ring-secondary outline-none" required="" type="email"/>
+</div>
+<div>
+<label class="block font-label-sm text-on-surface-variant mb-xs">Product URL</label>
+<input class="w-full px-md py-base rounded-lg border border-outline-variant focus:ring-2 focus:ring-secondary outline-none" required="" type="url"/>
+</div>
+<button class="w-full py-md bg-secondary text-white rounded-lg font-label-md hover:bg-opacity-90 active:scale-95 transition-all" type="submit">
+                        Join Priority Early Access
+                    </button>
+</form>
+</div>
+</div>
+</div>
+<script>
+        function toggleModal(id) {
+            const modal = document.getElementById(id);
+            const content = modal.querySelector('#modal-content');
+            if (modal.classList.contains('hidden')) {
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                setTimeout(() => {
+                    content.classList.remove('scale-95');
+                    content.classList.add('scale-100');
+                }, 10);
+            } else {
+                content.classList.remove('scale-100');
+                content.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 200);
+            }
+        }
+
+        // Close modal on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const modal = document.getElementById('early-access-modal');
+                if (!modal.classList.contains('hidden')) toggleModal('early-access-modal');
+            }
+        });
+
+        // Sticky Header effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 20) {
+                nav.classList.add('shadow-md');
+                nav.classList.add('h-14');
+                nav.classList.remove('h-16');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.remove('h-14');
+                nav.classList.add('h-16');
+            }
+        });
+    </script>
+</body></html>
